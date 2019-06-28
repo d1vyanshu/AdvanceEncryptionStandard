@@ -28,7 +28,7 @@ def SubWord(a):
     final = ""
 
     for x in range(4):
-        final += SBOX[2*x][2*x+1]
+        final += SBOX[int(a[2*x], base = 16)][int(a[2*x+1], base=16)]
     
     return final
 
@@ -47,16 +47,11 @@ def key_expansion(key,Nk,Nr):
 
     while x < 4*(Nr+1):
         temp =  word[x-1]
-        if i%Nk == 0:
-            temp = xor(SubWord(RotWord(temp)), RotConst[x/Nk])
-        elif (Nk > 6 and i%Nk == 4):
+        if x%Nk == 0:
+            temp = xor(SubWord(RotWord(temp)), RotConst[int(x/Nk)-1])
+        elif (Nk > 6 and x%Nk == 4):
             temp = SubWord(temp)
 
         word.append(xor(word[x-Nk],temp))
         x += 1
     return word
-
-key = ""
-Nk = 0
-Nr = 0
-key_expansion(key, Nk, Nr)

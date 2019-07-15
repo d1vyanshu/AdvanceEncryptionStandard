@@ -58,7 +58,6 @@ def MixColumn(state):                                                           
 def ShiftRow(state): 
   state_new = [['xy' for x in range(4)] for y in range(4)]                          #Verified
   for row in range(4):
-    for row in range(4):
       for column in range(4):
         if row == 0:
           state_new[row][column] = state[row][column]
